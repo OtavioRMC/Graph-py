@@ -3,6 +3,11 @@ from dataclasses import dataclass
 
 @dataclass
 class Edge:
+  """
+  Uma Edge é definida como uma nova conexão entre dois vértices , cada qual
+  representado por um índice inteiro. Por convenção "u" é usado para referenciar
+  o primeiro vértice e "v" utilizado para representar o segundo
+  """
   u: int # o vértice "de"
   v: int # o vértice "para"
 
