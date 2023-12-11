@@ -8,8 +8,14 @@ class Edge:
   representado por um índice inteiro. Por convenção "u" é usado para referenciar
   o primeiro vértice e "v" utilizado para representar o segundo
   """
-  u: int # o vértice "de"
-  v: int # o vértice "para"
+  start_vertex: int # o vértice "de"
+  end_vertex: int # o vértice "para"
+
+  def __post_init__(self):
+    if not isinstance(self.u, int) or not isinstance(self.v, int):
+      raise TypeError("Os Vértices devem ser inteiros.")
+    if self.u < 0 or self.v < 0:
+      raise ValueError("Os Vértices devem ser números inteiros positivos.")
 
   def reversed(self) -> Edge:
     """
