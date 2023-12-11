@@ -77,4 +77,41 @@ class Graph(Generic[V]):
     """
     return self._vertices[index]
   
+  def index_of(self, vertex: V) -> int:
+    """
+    Encontra o índice de um vértice de um grafo.
+    """
+    return self._vertices.index(vertex)
   
+  def neighbors_for_index(self,index:int) -> List[V]:
+    """
+    Encontra os vértices aos quais um vértice com determinado índice está conectado.
+    """
+    return list((map(self.vertex_at, [e.start_vertex for e in self._edges[index]])))
+  
+  def neighbors_for_vertex(self, vertex: V) -> List[V]:
+    """
+    Consulta o índice de um vértice e econtra seus vizinhos (método auxiliar)
+    """
+    return self.neighbors_for_index(self.index_of(vertex))
+  
+  def edges_for_index(self,index:int) -> List[Edge]:
+    """
+    Retorna todas as arestas associadas a um vértice em um índice.
+    """
+    return self._edges[index]
+  
+  def edges_for_vertex(self, vertex: V) -> List[Edge]:
+    """
+    Consulta o índice de um vértice e retorna suas arestas(método auxiliar)
+    """
+    return self.edges_for_index(self.index_of(vertex))
+  
+  def __str__(self) -> str:
+    """
+    Facilita a exibição do grafo.
+    """
+    desc: str = ""
+    for i in range (self.vertex_count):
+      desc += f"{self.vertex_at(i)} -> {self.neighbors_for_index(i)}\n"
+    return desc
