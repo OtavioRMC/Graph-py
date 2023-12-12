@@ -35,3 +35,9 @@ class Edge:
     de um objeto.
     """
     return f"{self.start_vertex} --[{self.weight}]--> {self.end_vertex}"
+
+  def copy(self) -> Edge:
+    """
+    Returns a copy of the current edge.
+    """
+    return Edge(self.start_vertex,self.end_vertex,self.weight)
