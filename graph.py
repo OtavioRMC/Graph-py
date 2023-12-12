@@ -118,23 +118,23 @@ class Graph(Generic[V]):
   
 if __name__ == "__main__":
   
-    # Create an instance of the Graph class
+  # Create an instance of the Graph class
   graph = Graph[str]()
 
-    # Add vertices to the graph
+  # Add vertices to the graph
   graph.add_vertex("A")
   graph.add_vertex("B")
   graph.add_vertex("C")
 
-    # Add edges to the graph
+  # Add edges to the graph
   graph.add_edge_by_vertices("A", "B", 1.0)  # Edge from "A" to "B" with weight 1.0
   graph.add_edge_by_vertices("B", "C", 2.0)  # Edge from "B" to "C" with weight 2.0
   graph.add_edge_by_vertices("C", "A", 3.0)  # Edge from "C" to "A" with weight 3.0
 
-    # Print the graph
+  # Print the graph
   print(graph)
 
-    # Print the neighbors of a vertex
+  # Print the neighbors of a vertex
   print(graph.neighbors_for_vertex("A"))
 
   # Print the edges of a vertex
