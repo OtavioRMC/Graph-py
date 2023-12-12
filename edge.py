@@ -10,7 +10,7 @@ class Edge:
   """
   start_vertex: int # o vértice "de"
   end_vertex: int # o vértice "para"
-  weight: float
+  weight: float # peso da aresta
   
   def __post_init__(self):
     if not isinstance(self.start_vertex, int) or not isinstance(self.end_vertex, int):

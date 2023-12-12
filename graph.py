@@ -56,20 +56,20 @@ class Graph(Generic[V]):
     self._edges[edge.start_vertex].append(edge)
     self._edges[edge.end_vertex].append(edge.reversed())
 
-  def add_edge_by_indices(self, start_vertex:int, end_vertex:int) -> None:
+  def add_edge_by_indices(self, start_vertex:int, end_vertex:int,weight:float) -> None:
     """
     Adiciona uma aresta usando índices dos vértices(método auxiliar)
     """
-    edge: Edge = Edge(start_vertex,end_vertex)
+    edge: Edge = Edge(start_vertex, end_vertex, weight)
     self.add_edge(edge)
 
-  def add_edge_by_vertices(self, first: V, second: V) -> None:
+  def add_edge_by_vertices(self, first: V, second: V,weight:float) -> None:
     """
     Adiciona uma aresta consultando os índices dos vértices (método auxiliar)
     """
     start_vertex: int = self._vertices.index(first)
     end_vertex: int = self._vertices.index(second)
-    self.add_edge_by_indices(first, second)
+    self.add_edge_by_indices(start_vertex, end_vertex, weight)
 
   def vertex_at(self, index:int) -> V:
     """
@@ -84,10 +84,10 @@ class Graph(Generic[V]):
     return self._vertices.index(vertex)
   
   def neighbors_for_index(self,index:int) -> List[V]:
-    """
-    Encontra os vértices aos quais um vértice com determinado índice está conectado.
-    """
-    return list((map(self.vertex_at, [e.start_vertex for e in self._edges[index]])))
+      """
+      Encontra os vértices aos quais um vértice com determinado índice está conectado.
+      """
+      return list(map(self.vertex_at, [e.end_vertex for e in self._edges[index]]))
   
   def neighbors_for_vertex(self, vertex: V) -> List[V]:
     """
@@ -115,3 +115,27 @@ class Graph(Generic[V]):
     for i in range (self.vertex_count):
       desc += f"{self.vertex_at(i)} -> {self.neighbors_for_index(i)}\n"
     return desc
+  
+if __name__ == "__main__":
+  
+    # Create an instance of the Graph class
+  graph = Graph[str]()
+
+    # Add vertices to the graph
+  graph.add_vertex("A")
+  graph.add_vertex("B")
+  graph.add_vertex("C")
+
+    # Add edges to the graph
+  graph.add_edge_by_vertices("A", "B", 1.0)  # Edge from "A" to "B" with weight 1.0
+  graph.add_edge_by_vertices("B", "C", 2.0)  # Edge from "B" to "C" with weight 2.0
+  graph.add_edge_by_vertices("C", "A", 3.0)  # Edge from "C" to "A" with weight 3.0
+
+    # Print the graph
+  print(graph)
+
+    # Print the neighbors of a vertex
+  print(graph.neighbors_for_vertex("A"))
+
+  # Print the edges of a vertex
+  print(graph.edges_for_vertex("A"))
